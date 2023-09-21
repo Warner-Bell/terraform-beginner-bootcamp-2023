@@ -206,4 +206,4 @@ If you lose this file, you lose knowning the state of your infrastructure.
 `.terraform.tfstate.backup` is the previous state file state.
 
 ### Terraform Directory
-`.terraform` directory contains binaries of terraform providers.
+`.terraform` directory contains binaries of terraform providers..
