@@ -235,3 +235,48 @@ Provide the following code (replace your token in the file):
 ```
 
 We have automated this workaround with the following bash script [bin/generate_tfrc_credentials](bin/generate_tfrc_credentials)
+
+## Week 0 Validation
+
+### Run Validation on week 0 deployment
+
+- Step 1: Check the box if you agree to the terms of the access agreement.
+- Step 2: Input the required parameters eg. AWS_ACCOUNT_ID, USER_AWS_REGION, S3_BUCKET_NAME.
+- Step 3: Setup Permissions by deploying generated cloudformation template or running the generated api command.
+- Step 4: Run the puller to pull specific data about the scoped resources in your cloud account.
+- Step 5: Run the validator to verify the scoped resources are configured correctly.
+
+The validator will check for passing specs, and passing asserts.
+
+## Issues Running the Validator
+After inputting the required information and running the validator `Run c182a880-e40d-4506-8c5d-34b5948aa7ed`.
+
+A "fail" result was returned with 0/1 specs passing and 2/3 asserts passing. The files were pulled successfully and the validator did run, however it was unable to find the bucket name I input in step 2.
+![Alt text](image.png)
+
+### Investigation
+After recieving the "fail" result and reviewing the output and stated reason for the fail, I verified that the bucket was indeed visible in my AWS account, and that I did use the bucket name and not some other identifier in step 2.
+![Alt text](image-1.png)
+
+### Result
+I was able to verify the bucket resource existing in the account and that the bucket name was in fact the identifier I used in step 2, furthermore I verified that the name was correctly input into the correct field in the validator step 2 and all other parameters were indeed correct.
+![Alt text](image-2.png)
+
+### Determination & Next Action
+After final review and ponderance of the results, I determined that the initial "fail" result is likely due to a false negative and that the next course of action should be to run the validator again.
+
+I went thorough the validation process a second time `
+Run 42554b11-f698-4f4e-8552-3413938b39d4`
+
+I completed the steps will the exact same information as was input in the initial run, this time taking extra care with the bucket name making sure there were no leading/trailing spaces or arrant letters. (not that I suspect that was the case initially...but...).
+
+This time the validator completed with a "pass" result, which seemed to confirm my initial suspicion of the validator being suceptable to false positives/negatives.
+![Alt text](image-3.png)
+
+### Take Aways
+It's a good thing multiple run attempts are given regarding validation, for situations such as this and other anomalous behaviors that are not uncommon when dealing with cloud technology, various equipment, platforms, and OSs.
+
+Special care should be taken when inputting and even copy pasting data, mistakes happen and weird things can surely crop up when pasting between different mediums.
+
+Scrutinize thorougly, sometimes you had it right the first time, you could easily find yourself lost down a rabbit hole trouble shooting a non issue becuase you recieved a ghost erroneous result. 
+
