@@ -1,4 +1,43 @@
-# Terraform Beginner Bootcamp 2023
+# Terraform-Bootcamp-Week-0
+
+# Table of Contents
+
+1. [Terraform Bootcamp Week 0](#Terraform-Bootcamp-Week-0)
+2. [Semantic Versioning :mage:](#semantic-versioning-mage)
+3. [Installing the Terraform CLI](#installing-the-terraform-cli)
+   - [Considerations with the Terraform CLI changes](#considerations-with-the-terraform-cli-changes)
+   - [Considerations for Linux Distribution](#considerations-for-linux-distribution)
+   - [Refactoring .tf Install to Bash](#refactoring-tf-install-to-bash)
+4. [Shebang Considerations](#shebang-considerations)
+5. [Execution Considerations](#execution-considerations)
+6. [Linux Permissions Considerations](#linux-permissions-considerations)
+7. [Github Lifecycle (Before, Init, Command)](#github-lifecycle-before-init-command)
+8. [Working Env Vars](#working-env-vars)
+   - [env command](#env-command)
+   - [Setting and Unsetting Env Vars](#setting-and-unsetting-env-vars)
+   - [Printing Vars](#printing-vars)
+   - [Scoping of Env Vars](#scoping-of-env-vars)
+   - [Persisting Env Vars in Gitpod](#persisting-env-vars-in-gitpod)
+9. [AWS CLI Installation](#aws-cli-installation)
+10. [Terraform Basics](#terraform-basics)
+    - [Terraform Registry](#terraform-registry)
+    - [Terraform Console](#terraform-console)
+    - [Terraform Init](#terraform-init)
+    - [Terraform Plan](#terraform-plan)
+    - [Terraform Apply](#terraform-apply)
+    - [Terraform Destroy](#terraform-destroy)
+    - [Terraform Lock Files](#terraform-lock-files)
+    - [Terraform State Files](#terraform-state-files)
+    - [Terraform Directory](#terraform-directory)
+11. [Issues with Terraform Cloud Login and Gitpod Workspace](#issues-with-terraform-cloud-login-and-gitpod-workspace)
+12. [Week 0 Validation](#week-0-validation)
+    - [Run Validation on week 0 deployment](#run-validation-on-week-0-deployment)
+    - [Issues Running the Validator](#issues-running-the-validator)
+    - [Investigation](#investigation)
+    - [Result](#result)
+    - [Determination & Next Action](#determination--next-action)
+    - [Take Aways](#take-aways)
+
 
 ## Semantic Versioning :mage:
 This project will use semantic versioning for tagging
@@ -254,6 +293,7 @@ After inputting the required information and running the validator `Run c182a880
 A "fail" result was returned with 0/1 specs passing and 2/3 asserts passing. The files were pulled successfully and the validator did run, however it was unable to find the bucket name I input in step 2.
 ![Alt text](image.png)
 
+
 ### Investigation
 After recieving the "fail" result and reviewing the output and stated reason for the fail, I verified that the bucket was indeed visible in my AWS account, and that I did use the bucket name and not some other identifier in step 2.
 ![Alt text](image-1.png)
@@ -271,7 +311,7 @@ Run 42554b11-f698-4f4e-8552-3413938b39d4`
 I completed the steps will the exact same information as was input in the initial run, this time taking extra care with the bucket name making sure there were no leading/trailing spaces or arrant letters. (not that I suspect that was the case initially...but...).
 
 This time the validator completed with a "pass" result, which seemed to confirm my initial suspicion of the validator being suceptable to false positives/negatives.
-![Alt text](image-3.png)
+![Alt text](image-4.png)
 
 ### Take Aways
 It's a good thing multiple run attempts are given regarding validation, for situations such as this and other anomalous behaviors that are not uncommon when dealing with cloud technology, various equipment, platforms, and OSs.
@@ -279,4 +319,3 @@ It's a good thing multiple run attempts are given regarding validation, for situ
 Special care should be taken when inputting and even copy pasting data, mistakes happen and weird things can surely crop up when pasting between different mediums.
 
 Scrutinize thorougly, sometimes you had it right the first time, you could easily find yourself lost down a rabbit hole trouble shooting a non issue becuase you recieved a ghost erroneous result. 
-
