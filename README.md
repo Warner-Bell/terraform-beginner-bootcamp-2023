@@ -1,6 +1,6 @@
 # Terraform Bootcamp Week 0
 
-![Alt text](image-5.png)
+![Alt text](journal/image-5.png)
 
 ## Weekly Journals
 - [Week 0 Journal](journal/week0.md)
