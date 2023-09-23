@@ -293,6 +293,7 @@ After inputting the required information and running the validator `Run c182a880
 A "fail" result was returned with 0/1 specs passing and 2/3 asserts passing. The files were pulled successfully and the validator did run, however it was unable to find the bucket name I input in step 2.
 ![Alt text](image.png)
 
+
 ### Investigation
 After recieving the "fail" result and reviewing the output and stated reason for the fail, I verified that the bucket was indeed visible in my AWS account, and that I did use the bucket name and not some other identifier in step 2.
 ![Alt text](image-1.png)
@@ -310,7 +311,7 @@ Run 42554b11-f698-4f4e-8552-3413938b39d4`
 I completed the steps will the exact same information as was input in the initial run, this time taking extra care with the bucket name making sure there were no leading/trailing spaces or arrant letters. (not that I suspect that was the case initially...but...).
 
 This time the validator completed with a "pass" result, which seemed to confirm my initial suspicion of the validator being suceptable to false positives/negatives.
-![Alt text](image-3.png)
+![Alt text](image-4.png)
 
 ### Take Aways
 It's a good thing multiple run attempts are given regarding validation, for situations such as this and other anomalous behaviors that are not uncommon when dealing with cloud technology, various equipment, platforms, and OSs.
