@@ -1,19 +1,3 @@
-terraform {
-  cloud {
-    organization = "Gadgetools_Unlimited"
-
-    workspaces {
-      name = "Terra-House"
-    }
-  }
-}
-
-provider "aws" {
-  # Configuration options
-}
-provider "random" {
-  # Configuration options
-}
 
 # https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string
 resource "random_string" "bucket_name" {
@@ -29,10 +13,7 @@ resource "random_string" "bucket_name" {
 resource "aws_s3_bucket" "example" {
   bucket = random_string.bucket_name.result
 
-}
-
-
-
-output "random_bucket_name" {
-  value = random_string.bucket_name.result
+  tags = {
+    UserUuid = var.user_uuid
+  }
 }
