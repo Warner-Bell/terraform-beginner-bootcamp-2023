@@ -109,4 +109,4 @@ module "terrahouse_aws" {
 ```
 
 
-[Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources)
+[Modules Sources](https://developer.hashicorp.com/terraform/language/modules/sources).
