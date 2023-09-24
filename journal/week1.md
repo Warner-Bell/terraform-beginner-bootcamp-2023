@@ -15,7 +15,9 @@ Remotely delete tag
 git push --delete origin tagname
 ```
 
-Checkout the commit that you want to retag. Grab the sha from your Github history.
+Checkout the commit that you want to retag. 
+
+Grab the sha from your Github history.
 
 ```sh
 git checkout <SHA>
