@@ -269,3 +269,25 @@ resource "aws_instance" "web" {
 }
 ```
 https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec
+
+https://developer.hashicorp.com/terraform/language/resources/provisioners/remote-exec
+
+## For Each Expressions
+
+For each allows us to enumerate over complex data types
+
+```
+[for s in var.list : upper(s)]
+```
+
+This is mostly useful when you are creating multiples of a cloud resource and you want to reduce the amount of repetitive terraform code.
+
+[For Each Expressions](https://developer.hashicorp.com/terraform/language/expressions/for)
+
+## Terraform Console
+
+- `tf init`-- just to be sure terraform is initialized.
+- `tf console`-- to access the terraform console.
+- `path.root`-- to find out where the root path is. 
+- `fileset("${path.root}/public/assets", "*")`-- to find and display files in a particular directory.
+- `fileset("${path.root}/public/assets", "*.{jpg,png,gig}")`-- to find and display certain files in a partricular directory.
