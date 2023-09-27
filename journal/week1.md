@@ -291,3 +291,22 @@ This is mostly useful when you are creating multiples of a cloud resource and yo
 - `path.root`-- to find out where the root path is. 
 - `fileset("${path.root}/public/assets", "*")`-- to find and display files in a particular directory.
 - `fileset("${path.root}/public/assets", "*.{jpg,png,gig}")`-- to find and display certain files in a partricular directory.
+
+## Week 1 Validation
+
+### Run Validation on week 0 deployment
+
+- Step 1: Check the box if you agree to the terms of the access agreement.
+- Step 2: Input the required parameters eg. AWS_ACCOUNT_ID, USER_AWS_REGION, S3_BUCKET_NAME.
+- Step 3: Setup Permissions by deploying generated cloudformation template or running the generated api command.
+- Step 4: Run the puller to pull specific data about the scoped resources in your cloud account.
+- Step 5: Run the validator to verify the scoped resources are configured correctly.
+
+The validator will check for passing specs, and passing asserts.
+
+### Result
+`Run 79b19b84-6e5f-4192-911a-b85ac218de77`
+
+Validator passed all checks aon first run.
+
+![Alt text](image-6.png)
