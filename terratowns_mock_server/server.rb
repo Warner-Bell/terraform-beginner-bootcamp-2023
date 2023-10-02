@@ -3,22 +3,55 @@ require 'json'
 require 'pry'
 require 'active_model'
 
+# we will mock having a state or database for this development server
+# by setting a global variable. You would never use a global variable 
+# in production server.
+
 $home = {}
 
-class Home
-  include ActiveModel::Validations
-  attr_accessor :town, :name, :description, :domain_name, :content_version
+# This is a ruby class that includes validations from ActiveRecord.
+# This will represent our Home resources as a ruby object.
 
+class Home
+  # ActiveModel is part of Ruby on Rails.
+  # it is used as an ORM. It has a module within
+  # ActiveModel that provides validations.
+  # The production Terratowns server is rails and uses
+  # very similar and in most cases identical validation
+  # https://guides.rubyonrails.org/active_model_basics.html
+  # https://guides.rubyonrails.org/active_record_validations.html
+  include ActiveModel::Validations
+  create some virtual attributes to stored on this object
+  # This will set a getter and setter
+  # eg. 
+  # home = new Home()
+  # home.town = 'hello' # setter
+  # home.town() # getter
+  attr_accessor :town, :name, :description, :domain_name, :content_version
+  validates :town, presence: true, inclusion: { in: [
+    'melomaniac-mansion',
+    'cooker-cove',
+    'video-valley',
+    'the-nomad-pad',
+    'gamers-grotto'
+  ] }
+  # visible to all users
   validates :town, presence: true
   validates :name, presence: true
+  # visible to all users
   validates :description, presence: true
+  # we want to lock this down to only be from cloudfront
   validates :domain_name, 
     format: { with: /\.cloudfront\.net\z/, message: "domain must be from .cloudfront.net" }
     # uniqueness: true, 
 
+  # content version has to be an integer
+  # we will make sure it an incremental version in the controller.  
   validates :content_version, numericality: { only_integer: true }
 end
 
+# We are extending a class from Sinatra::Base to 
+# turn this generic class to utilize the sinatra web-framework
 class TerraTownsMockServer < Sinatra::Base
 
   def error code, message
