@@ -28,6 +28,7 @@ class Home
   # home.town = 'hello' # setter
   # home.town() # getter
   attr_accessor :town, :name, :description, :domain_name, :content_version
+
   validates :town, presence: true, inclusion: { in: [
     'melomaniac-mansion',
     'cooker-cove',
@@ -72,29 +73,38 @@ class TerraTownsMockServer < Sinatra::Base
     end
   end
 
+  # return a harcoded access token
   def x_access_code
-    '9b49b3fb-b8e9-483c-b703-97ba88eef8e0'
+    return'9b49b3fb-b8e9-483c-b703-97ba88eef8e0'
   end
 
   def x_user_uuid
-    'e328f4ab-b99f-421c-84c9-4ccea042c7d1'
+    return'e328f4ab-b99f-421c-84c9-4ccea042c7d1'
   end
 
   def find_user_by_bearer_token
+    # https://swagger.io/docs/specification/authentication/bearer-authentication/
     auth_header = request.env["HTTP_AUTHORIZATION"]
+    # Check if the Authorization header exists?
     if auth_header.nil? || !auth_header.start_with?("Bearer ")
       error 401, "a1000 Failed to authenicate, bearer token invalid and/or teacherseat_user_uuid invalid"
     end
 
+    # Does the token match the one in our database?
+    # if we cant find it than return an error or if it doesn't match
+    # code = access_code = token
     code = auth_header.split("Bearer ")[1]
     if code != x_access_code
       error 401, "a1001 Failed to authenicate, bearer token invalid and/or teacherseat_user_uuid invalid"
     end
 
+    # was there a user_uuid in the body payload json?
     if params['user_uuid'].nil?
       error 401, "a1002 Failed to authenicate, bearer token invalid and/or teacherseat_user_uuid invalid"
     end
 
+    # the code and the user_uuid should be matching for user
+    #in rails: User. find_by access_code: code, user_uuid: user_uuid
     unless code == x_access_code && params['user_uuid'] == x_user_uuid
       error 401, "a1003 Failed to authenicate, bearer token invalid and/or teacherseat_user_uuid invalid"
     end
@@ -104,40 +114,57 @@ class TerraTownsMockServer < Sinatra::Base
   post '/api/u/:user_uuid/homes' do
     ensure_correct_headings
     find_user_by_bearer_token
+    # puts will print to the terminal similar to a print or console.log
     puts "# create - POST /api/homes"
 
+    # a begin/rescue is a try/catch, if an error occurs, result it.
+
     begin
+      # Sinatra does not automatically part json bodys as params
+      # like rails so we need to manuall parse it.
       payload = JSON.parse(request.body.read)
     rescue JSON::ParserError
       halt 422, "Malformed JSON"
     end
 
-    # Validate payload data
+    # assign the payload to variables
+    # to make easier to work with the code
+    # Validate payload data - not neccessarily
     name = payload["name"]
     description = payload["description"]
     domain_name = payload["domain_name"]
     content_version = payload["content_version"]
     town = payload["town"]
 
+
+    # printing the variables out to console to make it eaiser
+    # to see or debug what we have inputed into this endpoint
     puts "name #{name}"
     puts "description #{description}"
     puts "domain_name #{domain_name}"
     puts "content_version #{content_version}"
     puts "town #{town}"
 
+
+    # Create a new Home model and set to attributes
     home = Home.new
     home.town = town
     home.name = name
     home.description = description
     home.domain_name = domain_name
     home.content_version = content_version
-    
+
+    # ensure our validation checks pass otherwise
+    # return the errors
     unless home.valid?
       error 422, home.errors.messages.to_json
     end
 
+    # generating a uuid at random.
     uuid = SecureRandom.uuid
     puts "uuid #{uuid}"
+    # will mock our data to our mock databse
+    # which just a global variable
     $home = {
       uuid: uuid,
       name: name,
@@ -147,6 +174,7 @@ class TerraTownsMockServer < Sinatra::Base
       content_version: content_version
     }
 
+    # will just return uuid
     return { uuid: uuid }.to_json
   end
 
@@ -159,6 +187,7 @@ class TerraTownsMockServer < Sinatra::Base
     # checks for house limit
 
     content_type :json
+    # does the uuid for the home match the one in our mock database
     if params[:uuid] == $home[:uuid]
       return $home.to_json
     else
@@ -167,6 +196,7 @@ class TerraTownsMockServer < Sinatra::Base
   end
 
   # UPDATE
+  # very similar to create action
   put '/api/u/:user_uuid/homes/:uuid' do
     ensure_correct_headings
     find_user_by_bearer_token
@@ -213,9 +243,10 @@ class TerraTownsMockServer < Sinatra::Base
       error 404, "failed to find home with provided uuid and bearer token"
     end
 
+    # delete from mock database
     $home = {}
     { message: "House deleted successfully" }.to_json
   end
 end
-
+# This is what will run the server.
 TerraTownsMockServer.run!
