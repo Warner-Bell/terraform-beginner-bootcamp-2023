@@ -21,7 +21,7 @@ class Home
   # https://guides.rubyonrails.org/active_model_basics.html
   # https://guides.rubyonrails.org/active_record_validations.html
   include ActiveModel::Validations
-  create some virtual attributes to stored on this object
+  #create some virtual attributes to stored on this object
   # This will set a getter and setter
   # eg. 
   # home = new Home()
@@ -220,9 +220,9 @@ class TerraTownsMockServer < Sinatra::Base
 
     home = Home.new
     home.town = $home[:town]
+    home.domain_name = $home[:domain_name]
     home.name = name
     home.description = description
-    home.domain_name = domain_name
     home.content_version = content_version
 
     unless home.valid?
@@ -244,8 +244,9 @@ class TerraTownsMockServer < Sinatra::Base
     end
 
     # delete from mock database
+    uuid = $home[:uuid]
     $home = {}
-    { message: "House deleted successfully" }.to_json
+    { uuid: uuid }.to_json
   end
 end
 # This is what will run the server.
