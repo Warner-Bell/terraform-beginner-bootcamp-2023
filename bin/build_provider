@@ -1,9 +1,6 @@
 #! /usr/bin/bash
 
-<<<<<<< HEAD
 PLUGIN_DIR="/home/gitpod/.terraform.d/plugins/local.providers/local/terratowns/1.0.0/"
-=======
->>>>>>> main
 PLUGIN_NAME="terraform-provider-terratowns_v1.0.0"
 
 # https://servian.dev/terraform-local-providers-and-registry-mirror-configuration-b963117dfffa
