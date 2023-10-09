@@ -35,9 +35,8 @@ provider "terratowns" {
 #   content_version = var.content_version
 # }
 
-
 resource "terratowns_home" "home" {
-  name = "SoulTrek 2023"
+  name = "SoulTrek 2023!"
   description = <<DESCRIPTION
 Soul Trek is a meme style pop culture parody adaptation of the science fiction tv series Star Trek TNG,
 that followed the crew of a new starship Enterprise a century after the original series.
