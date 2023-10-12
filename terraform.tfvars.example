@@ -1,10 +1,10 @@
 terratowns_endpoint="https://terratowns.cloud/api"
-bucket_name="terraform-bootcamp-bucket-2"
+bucket_name="terratowns-bucket-10_11"
 soultrek = {
   public_path = "/workspace/terraform-beginner-bootcamp-2023/public/soul-trek"
-  content_version = 3 
+  content_version = 10 
 }
 rccars = {
   public_path = "/workspace/terraform-beginner-bootcamp-2023/public/rc-cars"
-  content_version = 2 
+  content_version = 10 
 }

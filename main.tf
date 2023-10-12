@@ -42,26 +42,26 @@ of intergalactic space travel with an element of funk. Images Created by Karter 
 DESCRIPTION
   domain_name = module.home_soultrek_hosting.domain_name
   #domain_name = "4ytq3gz.cloudfront.net"
-  town = "missingo"
+  town = "video-valley"
   content_version = var.soultrek.content_version
 }
 
 
-module "home_rccars_hosting" {
-  source = "./modules/terrahome_aws"
-  user_uuid = var.teacherseat_user_uuid
-  public_path = var.rccars.public_path
-  bucket_name = var.bucket_name
-  content_version = var.rccars.content_version
-}
+# module "home_rccars_hosting" {
+#   source = "./modules/terrahome_aws"
+#   user_uuid = var.teacherseat_user_uuid
+#   public_path = var.rccars.public_path
+#   bucket_name = var.bucket_name
+#   content_version = var.rccars.content_version
+# }
 
-resource "terratowns_home" "home_rccars" {
-  name = "RC Cars & Trucks"
-  description = <<DESCRIPTION
-There are some really cool and fun rc vehicles out there these days.
-DESCRIPTION
-  domain_name = module.home_rccars_hosting.domain_name
-  #domain_name = "4ytq3gz.cloudfront.net"
-  town = "missingo"
-  content_version = var.rccars.content_version
-}
+# resource "terratowns_home" "home_rccars" {
+#   name = "RC Cars & Trucks"
+#   description = <<DESCRIPTION
+# There are some really cool and fun rc vehicles out there these days.
+# DESCRIPTION
+#   domain_name = module.home_rccars_hosting.domain_name
+#   #domain_name = "4ytq3gz.cloudfront.net"
+#   town = "missingo"
+#   content_version = var.rccars.content_version
+# }
