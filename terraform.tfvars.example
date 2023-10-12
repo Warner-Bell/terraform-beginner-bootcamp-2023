@@ -1,5 +1,5 @@
 terratowns_endpoint="https://terratowns.cloud/api"
-bucket_name="terratowns-bucket-10_11"
+bucket_name="terratowns-bucket-100"
 soultrek = {
   public_path = "/workspace/terraform-beginner-bootcamp-2023/public/soul-trek"
   content_version = 10 
