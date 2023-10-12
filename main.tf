@@ -38,11 +38,11 @@ resource "terratowns_home" "home" {
 Soul Trek is a meme style pop culture parody adaptation of the science fiction tv series Star Trek TNG,
 that followed the crew of a new starship Enterprise a century after the original series.
 Soul Trek a series of images spoofing the characters and themes of the TNG tv series, explores the world
-of intergalactic space travel with an element of funk. Images Created by Karter AI Artz.
+of intergalactic space travel with an element of funk. Town Concept Created by Warner Bell, Images Created by Karter AI Artz.
 DESCRIPTION
   domain_name = module.home_soultrek_hosting.domain_name
   #domain_name = "4ytq3gz.cloudfront.net"
-  town = "missingo"
+  town = "video-valley"
   content_version = var.soultrek.content_version
 }
 
